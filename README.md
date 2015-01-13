@@ -8,7 +8,7 @@ Should be able to
 * in the created hypergrid-map directory 
     * `npm install`  
     * `bower install`
-* `grunt serve`
+    * `grunt serve`
 
 aaaaaand it **should** just run from there. 
 

@@ -164,7 +164,8 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath:  /\.\.\//,
+        exclude: ['bower_components/polymer','bower_components/webcomponentsjs' ],
       },
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -223,7 +224,7 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'],
+              js: [],//['concat'],//, 'uglifyjs'],
               css: ['cssmin']
             },
             post: {}
@@ -355,6 +356,17 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>'
         }]
       },
+      vendor: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            '**/*.*'
+          ]
+        }]
+      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
@@ -430,8 +442,17 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'copy:vendor'
   ]);
+
+  grunt.registerTask('build-lame', [
+    'clean:dist',
+    //'wiredep',
+    'copy:vendor'
+  ]);
+
+
 
   grunt.registerTask('default', [
     'newer:jshint',

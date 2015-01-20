@@ -27,7 +27,6 @@ angular.module('gridApp')
             setTimeout(function(){
               //get ahold of our json grid example
                 var jsonGrid = document.querySelector('#json-example');
-                console.dir( jsonGrid);
 
                 //get it's table model
                 var jsonModel = jsonGrid.getBehavior();
